@@ -1,0 +1,21 @@
+# Imagem base Node
+FROM node:20-alpine
+
+# Diretório de trabalho
+WORKDIR /app
+
+# Copiar package.json e package-lock.json
+COPY package*.json ./
+
+# Instalar dependências do projeto + Angular CLI global
+RUN npm install \
+    && npm install -g @angular/cli
+
+# Copiar todo o código
+COPY . .
+
+# Expor porta que o ng serve usa
+EXPOSE 4200
+
+# Comando para rodar o Angular
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]

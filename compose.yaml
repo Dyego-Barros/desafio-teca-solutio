@@ -1,0 +1,114 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}    
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+       desafio:
+         aliases:
+           - postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    depends_on:
+      - postgres
+    networks:
+       desafio:
+         aliases:
+           - pgadmin
+
+  back-end:
+    build: ./Back-end
+    container_name: back-end
+    restart: always
+    environment:
+      POSTGRES_URL_SQLALCHEMY: ${POSTGRES_URL_SQLALCHEMY}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - ./Back-end:/app
+    ports:
+      - "${BACKEND_PORT}:5000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+       desafio:
+         aliases:
+           - back-end
+  worker:
+    build: ./Worker
+    container_name: worker
+    restart: always
+    environment:
+      POSTGRES_URL: ${POSTGRES_URL}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    volumes:
+      - ./worker:/app
+    stdin_open: true  # mantém STDIN aberto
+    tty: true      
+    depends_on:
+      - redis
+      - postgres
+    
+    networks:
+       desafio:
+         aliases:
+           - worker
+  front-end:
+    build: ./Front-end/products-app
+    container_name: front-end
+    restart: always
+    ports:
+      - "${FRONTEND_PORT}:4200"
+    volumes:
+      - ./Front-End/products-app:/app
+      - /app/node_modules
+    depends_on:
+      - back-end
+    networks:
+       desafio:
+         aliases:
+           - front-end
+
+  redis:
+    image: redis:7
+    container_name: redis
+    hostname: redis
+    restart: always
+    #ports:
+    #  - "${REDIS_PORT}:6379"
+    networks:
+       desafio:
+         aliases:
+           - redis_db
+    
+
+volumes:
+  pgdata:
+networks:
+  desafio:
+    
+  
