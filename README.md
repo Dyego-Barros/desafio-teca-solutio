@@ -26,8 +26,8 @@ Antes de executar o projeto, você precisa ter instalado:
 Clone o projeto e entre no diretório:
 
 ```bash
-git clone https://seu-repositorio.git
-cd nome-do-repositorio
+git clone https://github.com/Dyego-Barros/desafio-teca-solutio
+cd desafio-teca-solutio
 ```
 ---
 
