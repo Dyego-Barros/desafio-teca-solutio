@@ -32,6 +32,7 @@ cd nome-do-repositorio
 ---
 
 ## Estrutura de diretorios
+```
 ├── Back-end/           # Código do backend Python
 ├── Front-end/          # Código do frontend Angular
 │   └── products-app/
@@ -39,7 +40,7 @@ cd nome-do-repositorio
 ├── docker-compose.yml  # Orquestração dos containers
 ├── .env                # Variáveis de ambiente
 └── README.md
-
+``` 
 ---
 ## Criando arquivo .env 
 
