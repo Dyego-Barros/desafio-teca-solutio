@@ -1,3 +1,0 @@
-01-12-2025 14:41 Operation: update, Data: {'id': 50, 'nome': 'Ipad 10', 'marca': 'Apple', 'valor': 7000.399, 'updated_at': None, 'created_at': None, 'in_stock': True}
-01-12-2025 14:55 Operation: create, Data: {'id': None, 'nome': 'iPhone 13', 'marca': 'Apple', 'valor': 3000.199, 'updated_at': None, 'created_at': None, 'in_stock': True}
-01-12-2025 14:56 Operation: update, Data: {'id': 51, 'nome': 'iPhone 13', 'marca': 'Apple', 'valor': 3000.199, 'updated_at': None, 'created_at': None, 'in_stock': True}
