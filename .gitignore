@@ -26,3 +26,11 @@ worker_messages_log.txt
 
 *.worker_messages_log.txt
 *./worker/worker_messages_log.txt
+
+*.vscode/
+*.vscode
+.vscode/
+./Back-end/.vscode/
+./Front-end/.vscode
+.gitignore
+*.gitignore

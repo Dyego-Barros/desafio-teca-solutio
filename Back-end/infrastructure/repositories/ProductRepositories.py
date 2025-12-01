@@ -35,6 +35,7 @@ class ProductRepositories(IProduct):
         except Exception as e:
             raise e
     
+    
     def update_product(self, product_id: int, product: Product) -> Product | None:
         try:
             product.id = product_id
