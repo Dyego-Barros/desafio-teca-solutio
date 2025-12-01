@@ -9,8 +9,10 @@ import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
+#Secret key para sessões
 app.config['SECRET_KEY'] =  os.environ.get("SECRET_KEY")
-app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")  # Chave secreta para JWT
+# Chave secreta para JWT
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")  
 
 # Configuração do Swagger
 app.config['SWAGGER'] = {
@@ -29,10 +31,11 @@ app.config['SWAGGER'] = {
 }
 
 swagger = Swagger(app)
-# Inicializar JWTManager corretamente
+
+# Inicializar JWTManager 
 jwt = JWTManager(app)
 
-
+#Registra rotas
 app.register_blueprint(productprint, url_prefix='/product')
 app.register_blueprint(userprints, url_prefix='/user')
 

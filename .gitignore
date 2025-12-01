@@ -19,3 +19,10 @@ wheels/
 ./worker/.vscode/
 .DS_Store
 .env
+
+./worker/worker_messages_log.txt
+worker_messages_log.txt
+.worker_messages_log.txt
+
+*.worker_messages_log.txt
+*./worker/worker_messages_log.txt
