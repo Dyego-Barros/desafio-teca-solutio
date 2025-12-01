@@ -6,6 +6,7 @@ services:
     container_name: postgres
     restart: always
     environment:
+      TIME_ZONE: ${TIMEZONE}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}    
@@ -37,6 +38,7 @@ services:
     container_name: back-end
     restart: always
     environment:
+      TIME_ZONE: ${TIMEZONE}
       POSTGRES_URL_SQLALCHEMY: ${POSTGRES_URL_SQLALCHEMY}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
@@ -58,6 +60,7 @@ services:
     container_name: worker
     restart: always
     environment:
+      TIME_ZONE: ${TIMEZONE}
       POSTGRES_URL: ${POSTGRES_URL}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
