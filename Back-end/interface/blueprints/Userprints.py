@@ -156,12 +156,7 @@ def delete_user(user_id):
       - Users
     security:
       - Bearer: []
-    parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+    parameters:     
       - name: user_id
         in: path
         type: integer
@@ -208,12 +203,7 @@ def update_user(user_id):
       - Users
     security:
       - Bearer: []
-    parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+    parameters:     
       - name: user_id
         in: path
         type: integer

@@ -24,10 +24,14 @@ app.config['SWAGGER'] = {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header',
-            'description': 'Token JWT no formato: Bearer {token}'
+            "description": "Digite: Bearer {seu_token_jwt}"
         }
     },
-    'security': [{'Bearer': []}]
+    'security': [
+           {
+            'Bearer': []
+            }
+        ]
 }
 
 swagger = Swagger(app)

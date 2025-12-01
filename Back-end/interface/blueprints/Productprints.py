@@ -2,12 +2,17 @@ from flask import Blueprint, request, jsonify
 from domain.entities.ProductEntity import ProductEntity as Product
 from application.services.ProductService import ProductService
 from flask_jwt_extended import jwt_required
+from flasgger.utils import swag_from
 
 productprint = Blueprint('productprint', __name__)
 service = ProductService()
 
 @productprint.route('/create', methods=['POST'])
 @jwt_required()
+@swag_from({
+    'security': [{'Bearer': []}],
+    'tags': ['Products']
+})
 def create_product():
     """
     Cria um novo produto (operações são enfileiradas no Redis)
@@ -17,11 +22,7 @@ def create_product():
     security:
       - Bearer: []
     parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+     
       - in: body
         name: body
         required: true
@@ -95,13 +96,7 @@ def list_products():
     tags:
       - Products
     security:
-      - Bearer: []
-    parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+      - Bearer: []  
     responses:
       200:
         description: Lista de produtos retornada com sucesso
@@ -156,12 +151,7 @@ def update_product(product_id):
       - Products
     security:
       - Bearer: []
-    parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+    parameters:      
       - name: product_id
         in: path
         type: integer
@@ -240,12 +230,7 @@ def delete_product(product_id):
       - Products
     security:
       - Bearer: []
-    parameters:
-      - name: Authorization
-        in: header
-        type: string
-        required: true
-        description: Token JWT no formato "Bearer {token}"
+    parameters:      
       - name: product_id
         in: path
         type: integer
